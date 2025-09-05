@@ -1,0 +1,5 @@
+# 🏰 Magic Adventure Game - Ultra Minimal (NO DEPENDENCIES)
+# Uses only Python built-in modules
+# Guaranteed to work on any Python version
+
+# NO EXTERNAL DEPENDENCIES REQUIRED
