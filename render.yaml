@@ -1,0 +1,55 @@
+# 🏰 Magic Adventure Game - Render Deployment Configuration
+# Version: v1.0.0
+# Created: September 4, 2025 - 2:35 PM UTC
+
+services:
+  # Web Service - Main game application
+  - type: web
+    name: magic-adventure-game
+    runtime: python
+    plan: starter  # Free tier
+    region: oregon
+    branch: master
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    healthCheckPath: /health
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHONPATH
+        value: .
+      - key: PORT
+        fromService:
+          type: web
+          name: magic-adventure-game
+          property: port
+    domains:
+      - magic-adventure-game.onrender.com
+
+  # Background Worker - AI Agents
+  - type: worker
+    name: ai-agents-worker
+    runtime: python
+    plan: starter
+    region: oregon
+    branch: master
+    buildCommand: pip install -r requirements.txt
+    startCommand: python concurrent_ai_agents.py --database-url $DATABASE_URL --redis-url $REDIS_URL
+    envVars:
+      - key: PYTHONPATH
+        value: .
+
+  # Redis Cache Service
+  - type: redis
+    name: game-cache
+    plan: starter
+    region: oregon
+    maxmemoryPolicy: allkeys-lru
+
+databases:
+  # PostgreSQL Database
+  - name: game-database
+    plan: starter  # Free PostgreSQL
+    region: oregon
+    databaseName: magic_adventure
+    user: gameuser

@@ -1,4 +1,8 @@
 # 🏰 Magic Adventure Game - System Architecture
+**Document Version:** v2.0.0  
+**Created:** September 4, 2025 - 2:15 PM UTC  
+**Last Updated:** September 4, 2025 - 2:30 PM UTC  
+**Updated By:** Architecture Integration Agent
 
 ## Conceptual Architecture
 
@@ -27,12 +31,18 @@ graph TB
         AA[Audio Agent]
     end
     
-    subgraph "Data Layer"
+    subgraph "Database Layer"
+        PG[(PostgreSQL)]
+        RD[(Redis Cache)]
         SD[Story Database]
         CD[Character Data]
         WD[World Data]
         PS[Player State]
         AD[Audio Assets]
+        UD[User Data]
+        WC[World Chunks]
+        QD[Quest Data]
+        AI_MEM[AI Agent Memory]
     end
     
     UI --> GM

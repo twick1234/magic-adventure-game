@@ -1,0 +1,42 @@
+# Magic Adventure Game - CrewAI Multi-Agent System Requirements
+
+# Core CrewAI Dependencies
+crewai>=0.28.0
+langchain>=0.1.0
+langchain-openai>=0.1.0
+langchain-community>=0.0.20
+
+# Web Framework (Optional - for API mode)
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+websockets>=11.0
+
+# Data Processing and Validation
+pydantic>=2.4.0
+pydantic-settings>=2.0.0
+
+# Configuration Management
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Async Support
+asyncio-mqtt>=0.11.0
+aiofiles>=23.0.0
+
+# Logging and Monitoring
+structlog>=23.2.0
+
+# Development and Testing (Optional)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+isort>=5.12.0
+
+# Performance Monitoring (Optional)
+psutil>=5.9.0
+memory-profiler>=0.61.0
+
+# Additional Utilities
+click>=8.1.0
+rich>=13.6.0
+httpx>=0.25.0

@@ -1,0 +1,50 @@
+# Magic Adventure Game - Database Dependencies
+
+# Core Database ORM
+sqlalchemy>=2.0.0
+alembic>=1.12.0
+
+# PostgreSQL Database Driver
+psycopg2-binary>=2.9.7
+
+# Password Hashing
+bcrypt>=4.0.0
+
+# Connection Pooling and Performance
+psycopg2-pool>=1.1
+sqlalchemy-utils>=0.41.0
+
+# Database Monitoring and Profiling
+sqlalchemy-stubs>=0.4
+pg_activity>=3.4.0  # Optional: PostgreSQL monitoring
+
+# Redis for Caching (Optional but recommended)
+redis>=5.0.0
+hiredis>=2.2.0  # Fast Redis parser
+
+# Database Testing Utilities
+pytest-postgresql>=5.0.0  # For testing with temporary PostgreSQL instances
+factory-boy>=3.3.0  # For generating test data
+
+# Configuration Management
+python-dotenv>=1.0.0
+
+# Type Hints and Validation
+typing-extensions>=4.8.0
+pydantic>=2.4.0
+
+# Development and Debugging
+rich>=13.6.0  # For pretty printing and debugging
+click>=8.1.0  # For CLI tools
+
+# Performance Monitoring
+memory-profiler>=0.61.0
+py-spy>=0.3.0  # Optional: Python profiler
+
+# Async Support (Future enhancement)
+asyncpg>=0.29.0  # Async PostgreSQL driver
+sqlalchemy[asyncio]>=2.0.0
+
+# Data Validation and Serialization
+marshmallow>=3.20.0
+marshmallow-sqlalchemy>=0.29.0

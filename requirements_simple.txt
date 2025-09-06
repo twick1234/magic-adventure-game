@@ -1,0 +1,25 @@
+# 🏰 Magic Adventure Game - Simplified Dependencies
+# Version: v1.1.0 - Build Fix
+# Created: September 5, 2025
+
+# Core Web Framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+Flask-SocketIO==5.3.6
+
+# Database (simplified)
+psycopg2-binary==2.9.9
+
+# Caching
+redis==5.0.1
+
+# Security
+bcrypt==4.1.2
+
+# Utilities
+python-dotenv==1.0.0
+requests==2.31.0
+
+# Web Server
+gunicorn==21.2.0
+eventlet==0.33.3

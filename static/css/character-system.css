@@ -1,0 +1,1165 @@
+/**
+ * Character System CSS Styles
+ * Complete styling for the AI character system, dialogue, quests, and trading
+ */
+
+/* Character Layer and Base Styles */
+.character-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* NPC Character Styling */
+.npc-character {
+    position: absolute;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 15;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -100%);
+}
+
+.npc-character:hover {
+    z-index: 20;
+}
+
+.npc-character.character-hover {
+    transform: translate(-50%, -100%) scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+}
+
+.npc-character.character-highlighted {
+    animation: characterPulse 2s infinite;
+}
+
+@keyframes characterPulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1));
+    }
+}
+
+/* Character Sprite */
+.character-sprite {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.character-sprite.idle {
+    animation: characterBreathe 4s ease-in-out infinite;
+}
+
+.character-sprite.moving {
+    animation: characterBob 0.6s ease-in-out infinite;
+}
+
+.character-sprite.attacking {
+    animation: characterAttack 0.8s ease-in-out;
+}
+
+.character-sprite.interacting {
+    animation: characterExcited 1s ease-in-out;
+}
+
+.character-sprite.alert::after {
+    content: '!';
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    animation: alertPulse 1s infinite;
+}
+
+@keyframes characterBreathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes characterBob {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes characterAttack {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2) rotate(-5deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+    100% { transform: scale(1); }
+}
+
+@keyframes characterExcited {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1) rotate(-2deg); }
+    75% { transform: scale(1.1) rotate(2deg); }
+}
+
+@keyframes alertPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* Character Emoji */
+.character-emoji {
+    font-size: 30px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Character Shadow */
+.character-shadow {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 8px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+/* Character UI */
+.character-ui {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.npc-character:hover .character-ui {
+    opacity: 1;
+}
+
+.character-name {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    border: 1px solid #ffd700;
+}
+
+.character-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
+}
+
+.health-bar {
+    width: 40px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.health-fill {
+    height: 100%;
+    background: #4ade80;
+    transition: width 0.5s ease, background-color 0.3s ease;
+}
+
+.character-level {
+    font-size: 10px;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* Interaction Hint */
+.interaction-hint {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid #ffd700;
+}
+
+.interaction-icon {
+    font-size: 14px;
+}
+
+/* Floating Text */
+.floating-text {
+    position: absolute;
+    pointer-events: none;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 20;
+    animation: floatUp 2s ease-out forwards;
+}
+
+.floating-text-info {
+    color: #3b82f6;
+}
+
+.floating-text-warning {
+    color: #f59e0b;
+}
+
+.floating-text-error {
+    color: #ef4444;
+}
+
+.floating-text-success {
+    color: #10b981;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0px);
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    80% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+}
+
+/* Action Bubble */
+.action-bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-style: italic;
+    pointer-events: none;
+    z-index: 18;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    max-width: 150px;
+    text-align: center;
+    animation: actionBubbleFloat 3s ease-out forwards;
+}
+
+@keyframes actionBubbleFloat {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0px) scale(0.8);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-5px) scale(1);
+    }
+    90% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-10px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-15px) scale(0.8);
+    }
+}
+
+.action-text {
+    color: #666;
+    font-style: italic;
+}
+
+.music-text {
+    color: #8b5cf6;
+    font-style: italic;
+}
+
+/* Particle Effects */
+.particle-effect {
+    position: absolute;
+    pointer-events: none;
+    z-index: 25;
+}
+
+.particle {
+    position: absolute;
+    font-size: 16px;
+    animation: particleFloat 2s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.5);
+    }
+}
+
+/* Debug Info */
+.debug-info {
+    background: rgba(0, 0, 0, 0.8);
+    color: #00ff00;
+    font-family: monospace;
+    font-size: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #00ff00;
+}
+
+/* Path Visualization (Debug) */
+.character-path {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.path-point {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 0, 0, 0.6);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+/* Dialogue System Styles */
+.dialogue-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.dialogue-container.hidden {
+    display: none;
+}
+
+.dialogue-box {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.character-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.1);
+    border-bottom: 2px solid #ffd700;
+}
+
+.character-avatar {
+    font-size: 48px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+}
+
+.character-details {
+    flex-grow: 1;
+}
+
+.character-name {
+    font-size: 24px;
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.character-mood {
+    color: #a8dadc;
+    font-size: 16px;
+}
+
+.dialogue-content {
+    padding: 20px;
+}
+
+.dialogue-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #fff;
+    margin-bottom: 20px;
+    min-height: 60px;
+}
+
+.dialogue-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.dialogue-choice-btn {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid #ffd700;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    text-align: left;
+}
+
+.dialogue-choice-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateX(10px);
+}
+
+.dialogue-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid #ffd700;
+}
+
+.dialogue-btn {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a2e;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dialogue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+.dialogue-btn-secondary {
+    background: linear-gradient(45deg, #6b7280, #9ca3af);
+    color: white;
+}
+
+body.dialogue-active {
+    overflow: hidden;
+}
+
+/* Interaction Popup */
+.interaction-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 900;
+    pointer-events: none;
+}
+
+.interaction-popup.hidden {
+    display: none;
+}
+
+.popup-content {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: popupSlideDown 0.3s ease-out;
+}
+
+.popup-character {
+    font-size: 24px;
+}
+
+.popup-text {
+    color: white;
+    font-size: 16px;
+}
+
+@keyframes popupSlideDown {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0px);
+    }
+}
+
+/* Quest System Styles */
+.quest-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.quest-container.hidden {
+    display: none;
+}
+
+.quest-panel {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    width: 95%;
+    max-width: 1000px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.quest-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.1);
+    border-bottom: 2px solid #ffd700;
+}
+
+.quest-header h3 {
+    color: #ffd700;
+    font-size: 24px;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #ffd700;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.quest-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid #ffd700;
+}
+
+.quest-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #a8dadc;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-right: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.quest-tab:last-child {
+    border-right: none;
+}
+
+.quest-tab:hover {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+}
+
+.quest-tab.active {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.quest-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.quest-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    border-right: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.quest-details {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.quest-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quest-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffd700;
+    transform: translateX(5px);
+}
+
+.quest-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.quest-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quest-icon {
+    font-size: 16px;
+}
+
+.quest-name {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.quest-difficulty {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.difficulty-easy {
+    background: #10b981;
+    color: white;
+}
+
+.difficulty-medium {
+    background: #f59e0b;
+    color: white;
+}
+
+.difficulty-hard {
+    background: #ef4444;
+    color: white;
+}
+
+.difficulty-expert {
+    background: #8b5cf6;
+    color: white;
+}
+
+.quest-giver {
+    color: #a8dadc;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.quest-description {
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.quest-progress {
+    color: #f59e0b;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.quest-rewards {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.reward-item {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.no-quests {
+    text-align: center;
+    color: #a8dadc;
+    padding: 40px;
+    font-style: italic;
+}
+
+.quest-detail-content h4 {
+    color: #ffd700;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.quest-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.quest-req {
+    background: rgba(168, 218, 220, 0.2);
+    color: #a8dadc;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.quest-full-description {
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.quest-objectives h5,
+.quest-rewards-detail h5 {
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.quest-objectives ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quest-objectives li {
+    padding: 5px 0;
+    color: #fff;
+}
+
+.quest-objectives li::before {
+    content: '• ';
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.quest-objectives li.completed {
+    color: #10b981;
+    text-decoration: line-through;
+}
+
+.quest-objectives li.completed::before {
+    content: '✓ ';
+}
+
+.quest-notes {
+    background: rgba(255, 215, 0, 0.1);
+    border-left: 3px solid #ffd700;
+    padding: 10px;
+    margin: 15px 0;
+}
+
+.quest-note {
+    color: #a8dadc;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.quest-detail-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.quest-accept-btn,
+.quest-abandon-btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.quest-accept-btn {
+    background: linear-gradient(45deg, #10b981, #34d399);
+    color: white;
+}
+
+.quest-abandon-btn {
+    background: linear-gradient(45deg, #ef4444, #f87171);
+    color: white;
+}
+
+.quest-accept-btn:hover,
+.quest-abandon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.quest-accept-btn.disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.quest-completed-msg {
+    color: #10b981;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quest-requirement-error {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.quest-hint {
+    color: #a8dadc;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+body.quest-ui-open {
+    overflow: hidden;
+}
+
+/* Trading System Styles */
+.trade-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.trade-container.hidden {
+    display: none;
+}
+
+.trade-panel {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.trade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.1);
+    border-bottom: 2px solid #ffd700;
+}
+
+.player-gold {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.trade-content {
+    padding: 20px;
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+}
+
+.merchant-inventory h4 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.trade-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.trade-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffd700;
+    transform: translateY(-2px);
+}
+
+.trade-item.selected {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.item-icon {
+    font-size: 24px;
+    width: 40px;
+    text-align: center;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-name {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.item-price {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.item-price.affordable {
+    color: #10b981;
+}
+
+.item-price.too-expensive {
+    color: #ef4444;
+}
+
+.item-type {
+    color: #a8dadc;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.trade-actions {
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    padding-top: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.selected-item {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 80px;
+}
+
+.selected-item-details h4 {
+    color: #ffd700;
+    margin-bottom: 8px;
+}
+
+.selected-item-details p {
+    color: #a8dadc;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.item-description {
+    color: #fff !important;
+    font-style: italic;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    padding-top: 8px;
+    margin-top: 8px;
+}
+
+.trade-btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    background: linear-gradient(45deg, #10b981, #34d399);
+    color: white;
+}
+
+.trade-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+
+.trade-btn:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+body.trade-ui-open {
+    overflow: hidden;
+}
+
+/* Message System */
+.quest-message,
+.trade-message {
+    position: fixed;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1001;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .dialogue-box,
+    .quest-panel,
+    .trade-panel {
+        width: 95%;
+        height: 95vh;
+        margin: 2.5vh auto;
+    }
+    
+    .quest-content {
+        flex-direction: column;
+    }
+    
+    .quest-list,
+    .quest-details {
+        flex: none;
+        border: none;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .inventory-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .trade-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .character-ui {
+        transform: translateX(-50%) scale(0.8);
+    }
+    
+    .dialogue-text {
+        font-size: 16px;
+    }
+    
+    .dialogue-choice-btn {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+/* High DPI Display Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .character-emoji {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .npc-character,
+    .character-sprite,
+    .dialogue-choice-btn,
+    .trade-item,
+    .quest-item {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .floating-text,
+    .action-bubble {
+        animation-duration: 0.1s !important;
+    }
+}
+
+/* Print styles (hide interactive elements) */
+@media print {
+    .dialogue-container,
+    .quest-container,
+    .trade-container,
+    .interaction-popup,
+    .npc-character {
+        display: none !important;
+    }
+}

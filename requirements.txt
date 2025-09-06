@@ -1,0 +1,47 @@
+# 🏰 Magic Adventure Game - Python Dependencies
+# Version: v1.0.0
+# Created: September 4, 2025 - 2:35 PM UTC
+
+# Web Framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+Flask-SocketIO==5.3.6
+python-socketio==5.10.0
+python-engineio==4.7.1
+
+# CrewAI and AI Dependencies
+crewai==0.177.0
+openai==1.93.0
+langchain==0.1.0
+langchain-openai==0.1.0
+
+# Database
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.25
+alembic==1.13.1
+
+# Caching
+redis==5.0.1
+
+# Security and Authentication
+bcrypt==4.1.2
+PyJWT==2.8.0
+
+# Utilities
+python-dotenv==1.0.0
+requests==2.31.0
+Pillow==10.2.0
+
+# Development and Testing
+pytest==7.4.4
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+
+# Async Support
+asyncio==3.4.3
+asyncpg==0.29.0
+aioredis==2.0.1
+
+# Web Server (for production)
+gunicorn==21.2.0
+eventlet==0.33.3
